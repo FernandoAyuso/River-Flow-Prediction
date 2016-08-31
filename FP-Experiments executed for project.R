@@ -267,17 +267,63 @@ bwplot(resultsABTs,main="Basic Models/ABT comparison - 12h Lead - 4ABT/4Ops each
 #######################################################################################################################################
 # Execute model iterations for the experiments
 #######################################################################################################################################
-modelRF1 <-   executeRF(expDataTrain, expDataTest, 100, fileName)
-modelRF5 <-   executeRF(expDataTrain, expDataTest, 500, fileName)
-modelRF750 <-   executeRF(expDataTrain, expDataTest, 500, fileName)
-modelRF10 <-  executeRF(expDataTrain, expDataTest, 1000, fileName)
-modelKNN <-    executeKNN(expDataTrain, expDataTest, fileName)
-modelKKNN <-  executeKKNN(expDataTrain, expDataTest, fileName)
-modelSVMR <-  executeSVM(expDataTrain, expDataTest, fileName)
-modelSVMRS <- executeSVMRS(expDataTrain, expDataTest, fileName)
-modelSVMRC <- executeSVMRC(expDataTrain, expDataTest, fileName)
-modelSVML <-  executeSVML(expDataTrain, expDataTest, fileName)
-modelSVML2 <- executeSVML2(expDataTrain, expDataTest, fileName)
+# After each execution the parametres are changed in the model implementation.
+modelKNN_Base <-    executeKNN(expDataTrain, expDataTest, fileName)
+modelKNN_Ini <-    executeKNN(expDataTrain, expDataTest, fileName)
+modelKNN_Sec <-    executeKNN(expDataTrain, expDataTest, fileName)
+plot(modelKNN_Base, main="modelKNN_Base")
+plot(modelKNN_Ini, main="modelKNN_Ini")
+plot(modelKNN_Sec, main="modelKNN_Sec")
+
+modelKKNN_Ini <-    executeKNN(expDataTrain, expDataTest, fileName)
+modelKKNN_Sec <-    executeKNN(expDataTrain, expDataTest, fileName)
+modelKKNN_Thi <-    executeKNN(expDataTrain, expDataTest, fileName)
+modelKKNN_Fou <-    executeKNN(expDataTrain, expDataTest, fileName)
+plot(modelKKNN_Ini, main="modelKKNN_Ini")
+plot(modelKKNN_Sec, main="modelKKNN_Sec")
+plot(modelKKNN_Thi, main="modelKKNN_Thi")
+plot(modelKKNN_Fou, main="modelKKNN_Fou")
+
+modelSVMR_Ini <-  executeSVM(expDataTrain, expDataTest, fileName)
+modelSVMRS_Ini <- executeSVMRS(expDataTrain, expDataTest, fileName)
+modelSVMRC_Ini <- executeSVMRC(expDataTrain, expDataTest, fileName)
+modelSVML_Ini <-  executeSVML(expDataTrain, expDataTest, fileName)
+modelSVML2_Ini <- executeSVML2(expDataTrain, expDataTest, fileName)
+modelSVML_Sec <-  executeSVML(expDataTrain, expDataTest, fileName)
+plot(modelSVMR_Ini, main="modelSVMR_Ini")
+plot(modelSVMRS_Ini, main="modelSVMRS_Ini")
+plot(modelSVMRC_Ini, main="modelSVMRC_Ini")
+plot(modelSVML_Ini, main="modelSVML_Ini")
+plot(modelSVML2_Ini, main="modelSVML2_Ini")
+plot(modelSVML_Sec, main="modelSVML_Sec")
+
+
+modelRF100_Ini <-   executeRF(expDataTrain, expDataTest, 100, fileName)
+modelRF500_Ini <-   executeRF(expDataTrain, expDataTest, 500, fileName)
+modelRF100_Sec <-   executeRF(expDataTrain, expDataTest, 100, fileName)
+modelRF500_Sec <-   executeRF(expDataTrain, expDataTest, 500, fileName)
+modelRF750_Sec <-   executeRF(expDataTrain, expDataTest, 500, fileName)
+modelRF1000_Sec <-  executeRF(expDataTrain, expDataTest, 1000, fileName)
+modelRF1000_Thi <-   executeRF(expDataTrain, expDataTest, 500, fileName)
+modelRF1000_Fou <-  executeRF(expDataTrain, expDataTest, 1000, fileName)# Executed in the next section as a bigger sample is used, here just for reference
+plot(modelRF100_Ini, main="modelRF100_Ini")
+plot(modelRF500_Ini, main="modelRF500_Ini")
+plot(modelRF100_Sec, main="modelRF100_Sec")
+plot(modelRF500_Sec, main="modelRF500_Sec")
+plot(modelRF750_Sec, main="modelRF750_Sec")
+plot(modelRF1000_Sec, main="modelRF1000_Sec")
+plot(modelRF1000_Thi, main="modelRF1000_Thi")
+
+
+resultsALLIterationsfinal <- resamples(list(modelKNN_Base=modelKNN_Base, modelKNN_Ini=modelKNN_Ini, modelKNN_Sec=modelKNN_Sec, 
+                                            modelKKNN_Ini=modelKKNN_Ini, modelKKNN_Sec=modelKKNN_Sec, modelKKNN_Thi=modelKKNN_Thi, modelKKNN_Fou=modelKKNN_Fou, 
+                                            modelRF100_Ini=modelRF100_Ini, modelRF500_Ini=modelRF500_Ini, modelRF100_Sec=modelRF100_Sec, modelRF500_Sec=modelRF500_Sec, 
+                                            modelRF750_Sec=modelRF750_Sec, modelRF1000_Sec=modelRF1000_Sec, modelRF1000_Thi=modelRF1000_Thi, modelRF1000_Fou=modelRF1000_Fou))
+                                            
+summary(resultsALLIterationsfinal)
+bwplot(resultsALLIterationsfinal,main="Flow forecast Model comparison")
+
+
 # Note the experiments will have to be run as many iterations are needed. Different names can be generated to then compare the models.
 
 #######################################################################################################################################
