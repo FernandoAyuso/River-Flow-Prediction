@@ -57,7 +57,6 @@ targetName <- "FutureFlowCMSx72S"
 expData <- read.csv( fileName, sep=",", header=T)
 expData$X <- NULL
 names(expData)[names(expData)==targetName] <- "TARGET"  # NAME TARGET to the target variable.
-expData <- head(expData,550000)
 
 expDataIndexes <- createDataPartition(expData$TARGET, p = .020)[[1]]
 expDataB <- expData[ expDataIndexes, ]
@@ -102,7 +101,6 @@ targetName <- "FutureFlowCMSx72S"
 expData <- read.csv( fileName, sep=",", header=T)
 expData$X <- NULL
 names(expData)[names(expData)==targetName] <- "TARGET"  # NAME TARGET to the target variable.
-expData <- head(expData,550000)
 nrow(expData)
 expDataIndexes <- createDataPartition(expData$TARGET, p = .020)[[1]]
 expDataB <- expData[ expDataIndexes, ]
@@ -149,7 +147,6 @@ targetName <- "FutureFlowCMSx72S"
 expData <- read.csv( fileName, sep=",", header=T)
 expData$X <- NULL
 names(expData)[names(expData)==targetName] <- "TARGET"  # NAME TARGET to the target variable.
-expData <- head(expData,550000)
 nrow(expData)
 expDataIndexes <- createDataPartition(expData$TARGET, p = .020)[[1]]
 expDataB <- expData[ expDataIndexes, ]
@@ -195,7 +192,6 @@ targetName <- "FutureFlowCMSx72S"
 expData <- read.csv( fileName, sep=",", header=T)
 expData$X <- NULL
 names(expData)[names(expData)==targetName] <- "TARGET"  # NAME TARGET to the target variable.
-expData <- head(expData,550000)
 expDataIndexes <- createDataPartition(expData$TARGET, p = .020)[[1]]
 expDataB <- expData[ expDataIndexes, ]
 inTrain <- createDataPartition(expDataB$TARGET, p = .91)[[1]]
